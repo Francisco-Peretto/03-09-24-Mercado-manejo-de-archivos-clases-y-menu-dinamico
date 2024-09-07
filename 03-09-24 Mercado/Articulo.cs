@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace _03_09_24_Mercado
 {
-    internal class Articulo // detalle de todos los articulos y mostrar la cnatidad de articulos de cada categoría, también mostrar el promedio del precio unitario de cada categoría
+    internal class Articulo 
     {
         private int _idArt;
-        private string _descArt; //nombre art
+        private string _descArt;
         private string _categoria;
         private int _precioUnitario;
         private int _stock;
@@ -62,15 +62,9 @@ namespace _03_09_24_Mercado
             set { this._stock = value; }
         }
 
-
-        // MostrarDatosArticulo
         public void MostrarDatosArticulo()
         {
             Console.WriteLine($"Id de Artículo: {this.IdArt} | Descripción: {this.DescArt} | Categoria: {this.Categoria} | Precio Unitario: {this.PrecioUnitario} | Stock: {this.Stock}");
         }
-
-
-        // Cargar artículos
-
     }
 }

@@ -14,6 +14,10 @@ namespace _03_09_24_Mercado
         private List<Articulo> ListaArticulos;
         private List<Empleado> ListaEmpleados;
 
+        double acSueldos;
+        float acAlmacen, acLibreria, acElectronica;
+        float promAlmacen, promLibreria, promElectronica;
+
         public Mercado()
         {
             this.RazonSocial = "";
@@ -47,7 +51,6 @@ namespace _03_09_24_Mercado
             get { return ListaEmpleados.Count; }
         }
   
-
         public int CantArt
         {
             get { return ListaArticulos.Count; }
@@ -125,29 +128,6 @@ namespace _03_09_24_Mercado
             Archivo.Close();
         }
 
-
-        // EmpleadosContratados lista bucle sobre MostrarDatosEmpleado NO VA MAS
-        public void EmpleadosContratados()
-        {
-            Console.WriteLine("cant : {0}", ListaEmpleados.Count);
-        }
-
-        // ArticulosRegistrados mostrar una vez cada nombre NO VA MAS
-        public void ArticulosRegistrados()
-        {
-            Console.WriteLine("Articulos registrados:");
-            foreach (Articulo articulo in ListaArticulos)
-            {
-                Console.WriteLine(articulo.DescArt);
-            }
-        }
-
-
-        double acSueldos = 0;
-        float acAlmacen, acLibreria, acElectronica;
-        float promAlmacen, promLibreria, promElectronica;
-        // GenerarReporteEmpleados suma de sueldos
-
         public void GenerarReporteEmpleados()
         {
             Console.WriteLine("\nListado de todos los empleados:");
@@ -160,7 +140,6 @@ namespace _03_09_24_Mercado
             Console.WriteLine($"Sueldos acumulados: ${acSueldos}");
         }
 
-        // GenerarReporteArticulos por categoria y promedio precio unitario por cat
         public void GenerarReporteArticulos()
         {
             Console.WriteLine("Reporte de artículos:\n");
@@ -183,31 +162,10 @@ namespace _03_09_24_Mercado
                     promElectronica += articulo.PrecioUnitario;
                 }
             }
-
             Console.WriteLine("\nReporte de artículos:");
             Console.WriteLine($"Cantidad de artículos de almacen: {acAlmacen}. Promedio de precio unitario: ${promAlmacen/ acAlmacen}");
             Console.WriteLine($"Cantidad de artículos de libreria: {acLibreria}. Promedio de precio unitario: ${promLibreria / acLibreria}");
             Console.WriteLine($"Cantidad de artículos de electrónica: {acElectronica}. Promedio de precio unitario: ${promElectronica / acElectronica}");
-
         }
-
-
-        // MostrarDatosEmpleado NO VA MAS
-        public void MostrarDatosEmpleado()
-        {
-            foreach (Empleado empleado in ListaEmpleados)
-            {
-                empleado.MostrarDatosEmpleado();
-            }
-        }
-
-        // MostrarDatosarticulo NO VA MAS
-        public void MostrarDatosArticulo()
-        {
-            foreach (Articulo articulo in ListaArticulos)
-            {
-                articulo.MostrarDatosArticulo();
-            }
-        }
-}
+    }
 }

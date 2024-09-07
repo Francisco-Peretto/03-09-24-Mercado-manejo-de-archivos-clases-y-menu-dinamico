@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _03_09_24_Mercado
 {
-    internal class Empleado // REporte c todos los empleados c detalles y una lyenda que muestre la cantidad y el total del sueldo de todos
+    internal class Empleado
     {
         private int _dni;
         private string _nombre;
@@ -52,12 +52,10 @@ namespace _03_09_24_Mercado
             set { this._sueldo = value; }
         }
 
-        // MostrarDatosEmpleado
         public void MostrarDatosEmpleado()
         {
             Console.WriteLine($"DNI: {this.Dni} | Nombre: {this.Nombre} | Apellido: {this.Apellido} | Sueldo: {this.Sueldo}");
         }
         
-        // CargarEmpleados
     }
 }
