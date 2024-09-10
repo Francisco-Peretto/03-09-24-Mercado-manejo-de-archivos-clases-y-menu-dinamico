@@ -10,14 +10,11 @@ namespace _03_09_24_Mercado
     {
         static void Main(string[] args)
         {
-            string archivoEmpleado = "empleados.txt";
-            string archivoArticulo = "articulos.txt";
-
             Mercado mercado = new Mercado();
-            mercado.llenarListaDeArticulos(archivoArticulo);
-            mercado.llenarListaDeEmpleados(archivoEmpleado);
+            mercado.llenarListaDeArticulos();
+            mercado.llenarListaDeEmpleados();
 
-            string[] menuOpciones = {"1: Reporte de empleados", "2: Reporte de artículos", "3: Agregar Empleado", "... salir" };
+            string[] menuOpciones = { "Reporte de empleados", "Reporte de artículos", "Agregar Empleado", "Modificar empleado", "Eliminar empleado", "Agregar artículo", "Modificar artículo", "Eliminar artículo", "Salir" };
             int posicionActual = 0;
             Console.CursorVisible = false;
             bool bucle = false;
@@ -39,7 +36,6 @@ namespace _03_09_24_Mercado
                     }
                     Console.WriteLine(menuOpciones[i]);
                     Console.ResetColor();
-
                 }
 
                 ConsoleKeyInfo tecla = Console.ReadKey();
@@ -49,97 +45,70 @@ namespace _03_09_24_Mercado
                     case ConsoleKey.Spacebar:
                         if (posicionActual == menuOpciones.Length - 1)
                         {
-                            Console.WriteLine("\n Saliendo");
+                            Console.WriteLine("\nSaliendo...");
                             bucle = true;
                         }
                         else if (posicionActual == 0)
                         {
-                            // Opciones de empleados
+                            // Reporte de empleados
                             mercado.GenerarReporteEmpleados();
-                            Console.WriteLine("\nPresione una tecla para continuar.");
-                            Console.ReadKey();
                         }
                         else if (posicionActual == 1)
                         {
-                            // Opciones de artículos
+                            // Reporte de artículos
                             mercado.GenerarReporteArticulos();
-                            Console.WriteLine("\nPresione una tecla para continuar.");
-                            Console.ReadKey();
-                            break;
                         }
                         else if (posicionActual == 2)
                         {
-                            int nuevoDni;
-                            string nuevoNombre, nuevoApellido;
-                            long nuevoSueldo;
-                            //Agregar empleado
-                            Console.WriteLine("Ingrese los datos requeridos a continuación:");
-                            Console.Write("DNI: ");
-                            nuevoDni = int.Parse(Console.ReadLine());
-                            Console.Write("Apellido: ");
-                            nuevoApellido = Console.ReadLine();
-                            Console.Write("Nombre: ");
-                            nuevoNombre = Console.ReadLine();
-                            Console.Write("Sueldo: ");
-                            nuevoSueldo = long.Parse(Console.ReadLine());
-
-                            Empleado nuevo = new Empleado(nuevoDni, nuevoApellido, nuevoNombre, nuevoSueldo);
-                            mercado.AgregarEmpleado(nuevo);
+                            // Agregar empleado
+                            mercado.AgregarEmpleado();
                         }
-
-
+                        else if (posicionActual == 3)
+                        {
+                            // Modificar empleado
+                            //mercado.ModificarEmpleado();
+                        }
+                        else if (posicionActual == 4)
+                        {
+                            // Eliminar empleado
+                            mercado.EliminarEmpleado();
+                        }
+                        else if (posicionActual == 5)
+                        {
+                            // Agregar artículo
+                            mercado.AgregarArticulo();
+                        }
+                        else if (posicionActual == 6)
+                        {
+                            // Modificar artículo
+                            // mercado.ModificarArticulo();
+                        }
+                        else if (posicionActual == 7)
+                        {
+                            // Eliminar artículo
+                            mercado.EliminarArticulo();
+                        }
+                        Console.WriteLine("\nPresione una tecla para continuar.");
+                        Console.ReadKey();
                         break;
+
                     case ConsoleKey.UpArrow:
                         posicionActual = Math.Max(0, posicionActual - 1);
                         break;
+
                     case ConsoleKey.DownArrow:
                         posicionActual = Math.Min(menuOpciones.Length - 1, posicionActual + 1);
-
                         break;
+
                     default:
-                        Console.WriteLine("Error");
+                        Console.WriteLine("Opción no válida.");
                         break;
                 }
             }
 
             Console.ReadKey();
-
-            // Menú
-            /*
-            string[] menu = new string[] { "1: Reporte de empleados", "2: Reporte de artículos", "3: Salir" };
-            int opc;
-            bool salir = false;
-            mercado.llenarListaDeArticulos(archivoArticulo);
-            mercado.llenarListaDeEmpleados(archivoEmpleado);
-
-            while (!salir)
-            {
-                Console.Clear();
-                foreach (string opcion in menu)
-                {
-                    Console.WriteLine(opcion);
-                }
-                Console.Write("Ingrese una opción: ");
-                opc = int.Parse(Console.ReadLine());
-                switch (opc)
-                {
-                    case 1:
-                        // Opciones de empleados
-                        mercado.GenerarReporteEmpleados();
-                        Console.WriteLine("\nPresione una tecla para continuar.");
-                        Console.ReadKey();
-                        break;
-                    case 2:
-                        // Opciones de artículos
-                        mercado.GenerarReporteArticulos();
-                        Console.WriteLine("\nPresione una tecla para continuar.");
-                        Console.ReadKey();
-                        break;
-                    case 3:
-                        salir = true;
-                        break;
-                }
-            }*/
         }
     }
 }
+
+

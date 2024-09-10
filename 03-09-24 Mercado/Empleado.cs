@@ -9,22 +9,22 @@ namespace _03_09_24_Mercado
     internal class Empleado
     {
         private int _dni;
-        private string _nombre;
         private string _apellido;
+        private string _nombre;
         private double _sueldo;
 
         public Empleado()
         {
             this.Dni = 0;
-            this.Nombre = "";
             this.Apellido = "";
+            this.Nombre = "";
             this.Sueldo = 0;
         }
-        public Empleado(int _dni, string _nombre, string _apellido, double _sueldo)
+        public Empleado(int _dni, string _apellido, string _nombre, double _sueldo)
         {
             this.Dni = _dni;
-            this.Nombre = _nombre;
             this.Apellido = _apellido;
+            this.Nombre = _nombre;
             this.Sueldo = _sueldo;
         }
 
@@ -34,16 +34,15 @@ namespace _03_09_24_Mercado
             set { this._dni = value; }
         }
 
-        public string Nombre
-        {
-            get { return this._nombre; }
-            set { this._nombre = value; }
-        }
-
         public string Apellido
         {
             get { return this._apellido; }
             set { this._apellido = value; }
+        }
+        public string Nombre
+        {
+            get { return this._nombre; }
+            set { this._nombre = value; }
         }
 
         public double Sueldo
