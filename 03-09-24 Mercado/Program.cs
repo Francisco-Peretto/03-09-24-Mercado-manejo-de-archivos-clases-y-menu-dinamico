@@ -17,7 +17,7 @@ namespace _03_09_24_Mercado
             mercado.llenarListaDeArticulos(archivoArticulo);
             mercado.llenarListaDeEmpleados(archivoEmpleado);
 
-            string[] menuOpciones = {"1: Reporte de empleados", "2: Reporte de artículos", "3: Salir" };
+            string[] menuOpciones = {"1: Reporte de empleados", "2: Reporte de artículos", "3: Agregar Empleado", "... salir" };
             int posicionActual = 0;
             Console.CursorVisible = false;
             bool bucle = false;
@@ -66,6 +66,25 @@ namespace _03_09_24_Mercado
                             Console.WriteLine("\nPresione una tecla para continuar.");
                             Console.ReadKey();
                             break;
+                        }
+                        else if (posicionActual == 2)
+                        {
+                            int nuevoDni;
+                            string nuevoNombre, nuevoApellido;
+                            long nuevoSueldo;
+                            //Agregar empleado
+                            Console.WriteLine("Ingrese los datos requeridos a continuación:");
+                            Console.Write("DNI: ");
+                            nuevoDni = int.Parse(Console.ReadLine());
+                            Console.Write("Apellido: ");
+                            nuevoApellido = Console.ReadLine();
+                            Console.Write("Nombre: ");
+                            nuevoNombre = Console.ReadLine();
+                            Console.Write("Sueldo: ");
+                            nuevoSueldo = long.Parse(Console.ReadLine());
+
+                            Empleado nuevo = new Empleado(nuevoDni, nuevoApellido, nuevoNombre, nuevoSueldo);
+                            mercado.AgregarEmpleado(nuevo);
                         }
 
 

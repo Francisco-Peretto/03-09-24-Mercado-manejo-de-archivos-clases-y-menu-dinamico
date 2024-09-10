@@ -54,7 +54,7 @@ namespace _03_09_24_Mercado
 
         public void MostrarDatosEmpleado()
         {
-            Console.WriteLine($"DNI: {this.Dni} | Nombre: {this.Nombre} | Apellido: {this.Apellido} | Sueldo: {this.Sueldo}");
+            Console.WriteLine($"DNI: {this.Dni} | Apellido: {this.Apellido} | Nombre: {this.Nombre} | Sueldo: {this.Sueldo}");
         }
         
     }

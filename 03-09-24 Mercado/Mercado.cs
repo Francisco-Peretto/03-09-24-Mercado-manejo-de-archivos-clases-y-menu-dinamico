@@ -73,24 +73,6 @@ namespace _03_09_24_Mercado
                 leer.Close();
                 Archivo.Close();
         }
-        
-        public void grabarListaDeEmpleados(string archivoEmpleado)
-        {
-            ListaEmpleados.Clear(); //Borrro la lista para arrancar
-            FileStream Archivo;
-            StreamWriter Grabar;
-
-            Archivo = new FileStream(archivoEmpleado, FileMode.Create);
-            Grabar = new StreamWriter(Archivo);
-
-            foreach (Empleado empleado in ListaEmpleados)
-            {
-                Grabar.WriteLine(empleado.Dni + ";" + empleado.Nombre + ";" + empleado.Apellido + ";" + empleado.Sueldo);
-            }
-
-            Grabar.Close();
-            Archivo.Close();
-        }
 
         public void llenarListaDeArticulos(string archivoArticulo)
         {
@@ -107,24 +89,6 @@ namespace _03_09_24_Mercado
                 ListaArticulos.Add(articulo);
             }
             leer.Close();
-            Archivo.Close();
-        }
-
-        public void grabarListaDeArticulos(string archivoArticulo)
-        {
-            ListaArticulos.Clear(); //Borrro la lista para arrancar
-            FileStream Archivo;
-            StreamWriter Grabar;
-
-            Archivo = new FileStream(archivoArticulo, FileMode.Create);
-            Grabar = new StreamWriter(Archivo);
-
-            foreach (Articulo articulo in ListaArticulos)
-            {
-                Grabar.WriteLine(articulo.IdArt + ";" + articulo.DescArt + ";" + articulo.Categoria + ";" + articulo.PrecioUnitario + ";" + articulo.Stock);
-            }
-
-            Grabar.Close();
             Archivo.Close();
         }
 
@@ -167,5 +131,26 @@ namespace _03_09_24_Mercado
             Console.WriteLine($"Cantidad de artículos de libreria: {acLibreria}. Promedio de precio unitario: ${promLibreria / acLibreria}");
             Console.WriteLine($"Cantidad de artículos de electrónica: {acElectronica}. Promedio de precio unitario: ${promElectronica / acElectronica}");
         }
+
+        public void AgregarEmpleado(Empleado nuevoEmpleado)
+        {
+            FileStream Archivo;
+            StreamWriter Grabar;
+
+            Archivo = new FileStream("empleados.txt", FileMode.Create);
+            Grabar = new StreamWriter(Archivo);
+
+            ListaEmpleados.Add(nuevoEmpleado);
+            foreach (Empleado empleado in ListaEmpleados)
+            {
+                Grabar.WriteLine(empleado.Dni + ";" + empleado.Apellido + ";" + empleado.Nombre + ";" + empleado.Sueldo);
+            }
+
+            Grabar.Close();
+            Archivo.Close();
+        }
+
+
+        //Modificar
     }
 }
