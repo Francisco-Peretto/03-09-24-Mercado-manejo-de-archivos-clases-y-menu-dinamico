@@ -48,44 +48,36 @@ namespace _03_09_24_Mercado
                             Console.WriteLine("\nSaliendo...");
                             bucle = true;
                         }
-                        else if (posicionActual == 0)
+                        else if (posicionActual == 0) // Reporte de empleados
                         {
-                            // Reporte de empleados
                             mercado.GenerarReporteEmpleados();
                         }
-                        else if (posicionActual == 1)
+                        else if (posicionActual == 1) // Reporte de artículos
                         {
-                            // Reporte de artículos
                             mercado.GenerarReporteArticulos();
                         }
-                        else if (posicionActual == 2)
+                        else if (posicionActual == 2) // Agregar empleado
                         {
-                            // Agregar empleado
                             mercado.AgregarEmpleado();
                         }
-                        else if (posicionActual == 3)
+                        else if (posicionActual == 3) // Modificar empleado
                         {
-                            // Modificar empleado
                             //mercado.ModificarEmpleado();
                         }
-                        else if (posicionActual == 4)
+                        else if (posicionActual == 4) // Eliminar empleado
                         {
-                            // Eliminar empleado
                             mercado.EliminarEmpleado();
                         }
-                        else if (posicionActual == 5)
+                        else if (posicionActual == 5) // Agregar artículo
                         {
-                            // Agregar artículo
                             mercado.AgregarArticulo();
                         }
-                        else if (posicionActual == 6)
+                        else if (posicionActual == 6) // Modificar artículo
                         {
-                            // Modificar artículo
                             // mercado.ModificarArticulo();
                         }
-                        else if (posicionActual == 7)
+                        else if (posicionActual == 7) // Eliminar artículo
                         {
-                            // Eliminar artículo
                             mercado.EliminarArticulo();
                         }
                         Console.WriteLine("\nPresione una tecla para continuar.");
@@ -105,7 +97,6 @@ namespace _03_09_24_Mercado
                         break;
                 }
             }
-
             Console.ReadKey();
         }
     }

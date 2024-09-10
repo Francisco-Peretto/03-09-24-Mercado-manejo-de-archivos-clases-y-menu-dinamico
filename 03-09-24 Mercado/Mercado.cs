@@ -15,8 +15,8 @@ namespace _03_09_24_Mercado
         private List<Empleado> ListaEmpleados;
 
         double acSueldos;
-        float acAlmacen, acLibreria, acElectronica;
-        float promAlmacen, promLibreria, promElectronica;
+        float acAlmacen = 0, acLibreria = 0, acElectronica = 0;
+        float promAlmacen = 0, promLibreria = 0, promElectronica = 0;
 
         public Mercado()
         {
@@ -58,7 +58,7 @@ namespace _03_09_24_Mercado
 
         public void llenarListaDeEmpleados()
         {
-            ListaEmpleados.Clear(); //Borrro la lista para arrancar
+            ListaEmpleados.Clear();
             FileStream Archivo;
             StreamReader leer;
             Archivo = new FileStream("empleados.txt", FileMode.Open);
@@ -76,7 +76,7 @@ namespace _03_09_24_Mercado
 
         public void llenarListaDeArticulos()
         {
-            ListaArticulos.Clear(); //Borrro la lista para arrancar
+            ListaArticulos.Clear();
             FileStream Archivo;
             StreamReader leer;
             Archivo = new FileStream("articulos.txt", FileMode.Open);
@@ -106,7 +106,7 @@ namespace _03_09_24_Mercado
 
         public void GenerarReporteArticulos()
         {
-            Console.WriteLine("Reporte de artículos:\n");
+            Console.WriteLine("\nInventario de artículos:");
             foreach (Articulo articulo in this.ListaArticulos)
             {
                 articulo.MostrarDatosArticulo();
@@ -246,11 +246,9 @@ namespace _03_09_24_Mercado
         {
             FileStream Archivo;
             StreamWriter Grabar;
-            StreamReader Leer;
 
             Archivo = new FileStream("articulos.txt", FileMode.Create);
             Grabar = new StreamWriter(Archivo);
-            Leer = new StreamReader(Archivo);
 
             int nuevoId, nuevoPrecio, nuevoStock;
             string nuevoDescripcion, nuevoCategoria;
@@ -293,9 +291,9 @@ namespace _03_09_24_Mercado
             }
 
             Grabar.Close();
-            Leer.Close();
             Archivo.Close();
         }
+
         //Modificar articulo
 
         //Eliminar articulo
