@@ -132,6 +132,7 @@ namespace _03_09_24_Mercado
             Console.WriteLine($"Cantidad de artículos de electrónica: {acElectronica}. Promedio de precio unitario: ${promElectronica / acElectronica}");
         }
 
+        // Agregar Empleado
         public void AgregarEmpleado()
         {
             FileStream Archivo;
@@ -181,9 +182,138 @@ namespace _03_09_24_Mercado
             Archivo.Close();
         }
 
-        //Modificar Empleado
+        // Modificar Empleado
+        public void ModificarEmpleado()
+        {
+            int dni;
+            string apellido = "", nombre = "";
+            double sueldo = 0;
+            bool encontrado = false;
+            bool salir = false;
+            char eleccion, terminar;
 
-        //Eliminar empleado
+            Console.Write("Ingrese el DNI del empleado a modificar: ");
+            dni = int.Parse(Console.ReadLine());
+
+            Empleado empleadoModificado = null;
+            foreach (Empleado empleado in ListaEmpleados)
+            {
+                if (empleado.Dni == dni)
+                {
+                    empleado.MostrarDatosEmpleado();
+                    empleadoModificado = empleado;
+                    encontrado = true;
+                }
+            }
+            if (encontrado)
+            {
+                do
+                {
+                    Console.Write("¿Qué desea modificar de este empleado? 'd' (DNI) / 'a' (apellido) / 'n' (nombre) / 's' (sueldo) / 'x' (cancelar) ");
+                    while (!(char.TryParse(Console.ReadLine().ToLower(), out eleccion) && (eleccion == 'd' || eleccion == 'a' || eleccion == 'n' || eleccion == 's' || eleccion == 'x')))
+                    {
+                        Console.WriteLine("Error en la elección. Inténtelo nuevamente\n");
+                        Console.Write("¿Qué desea modificar de este empleado? 'd' (DNI) / 'a' (apellido) / 'n' (nombre) / 's' (sueldo) / 'x' (cancelar) ");
+                    }
+
+                    switch (eleccion)
+                    {
+
+                        case 'x':
+                            Console.WriteLine("Volviendo al menú");
+                            break;
+
+                        case 'd':
+                            Console.Write("Ingrese el nuevo DNI: ");
+                            if (int.TryParse(Console.ReadLine(), out dni))
+                            {
+                                empleadoModificado.Dni = dni;
+                            }
+                            else
+                            {
+                                Console.WriteLine("DNI inválido.");
+                            }
+                            break;
+
+                        case 'a':
+                            Console.Write("Ingrese el nuevo apellido: ");
+                            apellido = Console.ReadLine();
+                            empleadoModificado.Apellido = apellido;
+                            break;
+
+                        case 'n':
+                            Console.Write("Ingrese el nuevo nombre: ");
+                            nombre = Console.ReadLine();
+                            empleadoModificado.Nombre = nombre;
+                            break;
+
+                        case 's':
+                            Console.Write("Ingrese el nuevo sueldo: ");
+                            if (double.TryParse(Console.ReadLine(), out sueldo))
+                            {
+                                empleadoModificado.Sueldo = sueldo;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Sueldo inválido.");
+                            }
+                            break;
+                    }
+
+                    FileStream archivo = new FileStream("empleados.txt", FileMode.Open);
+                    StreamReader leer = new StreamReader(archivo);
+                    List<string> stringEmpleados = new List<string>();
+
+                    while (!leer.EndOfStream)
+                    {
+                        string stringDatos = leer.ReadLine();
+                        string[] datos = stringDatos.Split(';');
+                        int dniEmpleado = int.Parse(datos[0]);
+
+                        if (dniEmpleado == empleadoModificado.Dni)
+                        {
+                            stringEmpleados.Add($"{empleadoModificado.Dni};{empleadoModificado.Apellido};{empleadoModificado.Nombre};{empleadoModificado.Sueldo}");
+                        }
+                        else
+                        {
+                            stringEmpleados.Add(stringDatos);
+                        }
+                    }
+
+                    leer.Close();
+                    archivo.Close();
+                    FileStream archivoEscribir = new FileStream("empleados.txt", FileMode.Create);
+                    StreamWriter escribir = new StreamWriter(archivoEscribir);
+
+                    foreach (string empleado in stringEmpleados)
+                    {
+                        escribir.WriteLine(empleado);
+                    }
+
+                    escribir.Close();
+                    archivoEscribir.Close();
+
+                    Console.WriteLine("Empleado modificado.");
+
+                    Console.Write("¿Desea realizar otro cambio? s/n: ");
+                    while (!(char.TryParse(Console.ReadLine().ToLower(), out terminar) && (terminar == 's' || terminar == 'n')))
+                    {
+                        Console.WriteLine("Error en la elección. Inténtelo nuevamente\n");
+                        Console.Write("¿Desea realizar otro cambio? s/n: ");
+                    }
+                    salir = (terminar == 'n');
+                }
+                
+
+                while (!salir);
+            }
+            else
+            {
+                Console.WriteLine("No se encontró al empleado.");
+            }
+        }
+
+        // Eliminar empleado
         public void EliminarEmpleado()
         {
             int dni;
@@ -241,7 +371,7 @@ namespace _03_09_24_Mercado
             }
         }
 
-        //Agregar Artículo
+        // Agregar Artículo
         public void AgregarArticulo()
         {
             FileStream Archivo;
@@ -293,10 +423,152 @@ namespace _03_09_24_Mercado
             Grabar.Close();
             Archivo.Close();
         }
+        
+        // Modificar Artículo
+        public void ModificarArticulo()
+        {
+            int id, stock = 0, precio = 0;
+            string descripcion = "", categoria = "";
+            bool encontrado = false;
+            bool salir = false;
+            char eleccion, terminar;
 
-        //Modificar articulo
+            Console.Write("Ingrese el ID del artículo a modificar: ");
+            id = int.Parse(Console.ReadLine());
 
-        //Eliminar articulo
+            Articulo articuloModificado = null;
+            foreach (Articulo articulo in ListaArticulos)
+            {
+                if (articulo.IdArt == id)
+                {
+                    articulo.MostrarDatosArticulo();
+                    articuloModificado = articulo;
+                    encontrado = true;
+                }
+            }
+
+            if (encontrado)
+            {
+                do
+                {
+                    Console.Write("¿Qué desea modificar de este artículo? 'i' (ID) / 'd' (descripción) / 'c' (categoría) / 's' (stock) / 'p' (precio) / 'x' (cancelar) ");
+                    while (!(char.TryParse(Console.ReadLine().ToLower(), out eleccion) && (eleccion == 'i' || eleccion == 'd' || eleccion == 'c' || eleccion == 's' || eleccion == 'p' || eleccion == 'x')))
+                    {
+                        Console.WriteLine("Error en la elección. Inténtelo nuevamente\n");
+                        Console.Write("¿Qué desea modificar de este artículo? 'i' (ID) / 'd' (descripción) / 'c' (categoría) / 's' (stock) / 'p' (precio) / 'x' (cancelar) ");
+                    }
+
+                    switch (eleccion)
+                    {
+                        case 'x':
+                            Console.WriteLine("Volviendo al menú.");
+                            return;
+
+                        case 'i':
+                            Console.Write("Ingrese el nuevo ID: ");
+                            if (int.TryParse(Console.ReadLine(), out id))
+                            {
+                                articuloModificado.IdArt = id;
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID inválido.");
+                            }
+                            break;
+
+                        case 'd':
+                            Console.Write("Ingrese la nueva descripción: ");
+                            descripcion = Console.ReadLine();
+                            articuloModificado.DescArt = descripcion;
+                            break;
+
+                        case 'c':
+                            Console.Write("Ingrese la nueva categoría: ");
+                            categoria = Console.ReadLine();
+                            articuloModificado.Categoria = categoria;
+                            break;
+
+                        case 's':
+                            Console.Write("Ingrese el nuevo stock: ");
+                            if (int.TryParse(Console.ReadLine(), out stock))
+                            {
+                                articuloModificado.Stock = stock;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Stock inválido.");
+                            }
+                            break;
+
+                        case 'p':
+                            Console.Write("Ingrese el nuevo precio: ");
+                            if (int.TryParse(Console.ReadLine(), out precio))
+                            {
+                                articuloModificado.PrecioUnitario = precio;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Precio inválido.");
+                            }
+                            break;
+                    }
+
+                    FileStream archivo = new FileStream("articulos.txt", FileMode.Open);
+                    StreamReader leer = new StreamReader(archivo);
+                    List<string> stringArticulos = new List<string>();
+
+                    while (!leer.EndOfStream)
+                    {
+                        string stringDatos = leer.ReadLine();
+                        string[] datos = stringDatos.Split(';');
+                        int idArticulo = int.Parse(datos[0]);
+
+                        if (idArticulo == articuloModificado.IdArt)
+                        {
+                            stringArticulos.Add($"{articuloModificado.IdArt};{articuloModificado.DescArt};{articuloModificado.Categoria};{articuloModificado.Stock};{articuloModificado.PrecioUnitario}");
+                        }
+                        else
+                        {
+                            stringArticulos.Add(stringDatos);
+                        }
+                    }
+
+                    leer.Close();
+                    archivo.Close();
+
+
+                    FileStream archivoEscribir = new FileStream("articulos.txt", FileMode.Create);
+                    StreamWriter escribir = new StreamWriter(archivoEscribir);
+
+                    foreach (string articulo in stringArticulos)
+                    {
+                        escribir.WriteLine(articulo);
+                    }
+
+                    escribir.Close();
+                    archivoEscribir.Close();
+
+                    Console.WriteLine("Artículo modificado.");
+
+                    Console.Write("¿Desea realizar otro cambio? s/n: ");
+                    while (!(char.TryParse(Console.ReadLine().ToLower(), out terminar) && (terminar == 's' || terminar == 'n')))
+                    {
+                        Console.WriteLine("Error en la elección. Inténtelo nuevamente\n");
+                        Console.Write("¿Desea realizar otro cambio? s/n: ");
+                    }
+
+                    salir = (terminar == 'n');
+                }
+                while (!salir);
+            }
+            else
+            {
+                Console.WriteLine("No se encontró el artículo.");
+            }
+        }
+
+
+        // Eliminar articulo
         public void EliminarArticulo()
         {
             int id;

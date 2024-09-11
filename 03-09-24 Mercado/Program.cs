@@ -62,7 +62,7 @@ namespace _03_09_24_Mercado
                         }
                         else if (posicionActual == 3) // Modificar empleado
                         {
-                            //mercado.ModificarEmpleado();
+                            mercado.ModificarEmpleado();
                         }
                         else if (posicionActual == 4) // Eliminar empleado
                         {
@@ -74,7 +74,7 @@ namespace _03_09_24_Mercado
                         }
                         else if (posicionActual == 6) // Modificar artículo
                         {
-                            // mercado.ModificarArticulo();
+                            mercado.ModificarArticulo();
                         }
                         else if (posicionActual == 7) // Eliminar artículo
                         {
