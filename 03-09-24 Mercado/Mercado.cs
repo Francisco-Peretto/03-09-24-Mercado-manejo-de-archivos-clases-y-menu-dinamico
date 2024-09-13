@@ -14,10 +14,6 @@ namespace _03_09_24_Mercado
         private List<Articulo> ListaArticulos;
         private List<Empleado> ListaEmpleados;
 
-        double acSueldos;
-        float acAlmacen = 0, acLibreria = 0, acElectronica = 0;
-        float promAlmacen = 0, promLibreria = 0, promElectronica = 0;
-
         public Mercado()
         {
             this.RazonSocial = "";
@@ -92,8 +88,10 @@ namespace _03_09_24_Mercado
             Archivo.Close();
         }
 
+        double acSueldos;
         public void GenerarReporteEmpleados()
         {
+            
             Console.WriteLine("\nListado de todos los empleados:");
             foreach (Empleado empleado in this.ListaEmpleados)
             {
@@ -106,6 +104,8 @@ namespace _03_09_24_Mercado
 
         public void GenerarReporteArticulos()
         {
+            float acAlmacen = 0, acLibreria = 0, acElectronica = 0;
+            float promAlmacen = 0, promLibreria = 0, promElectronica = 0;
             Console.WriteLine("\nInventario de artículos:");
             foreach (Articulo articulo in this.ListaArticulos)
             {
